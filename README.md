@@ -13,5 +13,6 @@
 *	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
 
+*	Container Docker
 ## Implementados:
 *	Autenticação e autorização com tokens
