@@ -1,7 +1,7 @@
 # Blog-API
 
 
-##implementar:
+## Implementar:
 
 *	Usuario publica um artigo
 *	Usuario comenta um artigo
@@ -12,5 +12,6 @@
 	
 *	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
-##implementados:
+
+## Implementados:
 *	Autenticação e autorização com tokens
