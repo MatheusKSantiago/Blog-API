@@ -21,17 +21,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    SecurityFilter filter) throws Exception{
         return http
-                .csrf(CsrfConfigurer::disable)
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->{
                     auth
-                            .requestMatchers("user/login").permitAll()
-                            .requestMatchers("auth/login").permitAll()
-                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/user/login").permitAll()
+                            .requestMatchers("/auth/login").permitAll()
                             .anyRequest().authenticated();
                 })
+                .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .headers(h ->h.frameOptions(f->f.disable()))
-                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 

@@ -19,7 +19,7 @@ public class UserController {
         this.tokenService = tokenService;
     }
 
-   @GetMapping("login")
+   @PostMapping("login")
     public void login(@RequestBody UserLoginDTO user,
                                         HttpServletResponse response) throws IOException {
        response.sendRedirect("/auth/login");
