@@ -14,5 +14,8 @@
 *	Usuario visualiza os artigos ordenado por mais comentados
 
 *	Container Docker
+* 	Testes de integração
+* 	Testes de unidade
 ## Implementados:
 *	Autenticação e autorização com tokens
+*	Teste de integração
