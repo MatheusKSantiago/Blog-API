@@ -31,4 +31,10 @@ public class ArticleController {
         articleService.save(articleCreationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> article(@PathVariable long id){
+        articleService.delete(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
 }

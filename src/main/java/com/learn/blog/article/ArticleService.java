@@ -39,4 +39,8 @@ public class ArticleService {
             articleImageRepository.save(articleImage);
         }
     }
+
+    public void delete(long id){
+        articleRepository.deleteById(id);
+    }
 }

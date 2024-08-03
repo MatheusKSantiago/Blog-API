@@ -17,7 +17,7 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<ArticleImage> images;
 
     @ManyToOne
