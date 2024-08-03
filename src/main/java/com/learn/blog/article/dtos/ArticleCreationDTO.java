@@ -1,4 +1,4 @@
-package com.learn.blog.article;
+package com.learn.blog.article.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

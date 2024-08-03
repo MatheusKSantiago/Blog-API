@@ -1,4 +1,4 @@
-package com.learn.blog.article;
+package com.learn.blog.article.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

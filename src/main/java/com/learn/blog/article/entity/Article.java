@@ -1,5 +1,6 @@
-package com.learn.blog.article;
+package com.learn.blog.article.entity;
 
+import com.learn.blog.article.entity.ArticleImage;
 import com.learn.blog.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
