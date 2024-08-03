@@ -30,7 +30,7 @@ public class ArticleController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Transactional
-    public ResponseEntity<String> article(@ModelAttribute @Valid ArticleCreationDTO articleCreationDTO)
+    public ResponseEntity<Void> article(@ModelAttribute @Valid ArticleCreationDTO articleCreationDTO)
             throws IOException
     {
 
@@ -39,19 +39,19 @@ public class ArticleController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> articleDelete(@PathVariable long id){
+    public ResponseEntity<Void> articleDelete(@PathVariable long id){
 
         articleService.delete(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @PutMapping(path = "{id}",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<String> articleUpdate(@PathVariable long id,
+    public ResponseEntity<Void> articleUpdate(@PathVariable long id,
                                                 @ModelAttribute @Valid ArticleUpdateDTO article){
-
-
 
         articleService.update(id,article);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
+
+
 }
