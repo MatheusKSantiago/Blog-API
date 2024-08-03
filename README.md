@@ -3,7 +3,6 @@
 
 ## Implementar:
 
-*	Usuario publica um artigo
 *	Usuario comenta um artigo
 *	Usuario curte um artigo
 *	Usuario deleta (seu proprio artigo)
@@ -19,3 +18,4 @@
 ## Implementados:
 *	Autenticação e autorização com tokens
 *	Teste de integração
+*	Usuario publica um artigo
