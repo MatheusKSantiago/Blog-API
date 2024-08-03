@@ -3,7 +3,6 @@
 
 ## Implementar:
 
-*	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
 
 *	Container Docker
@@ -19,3 +18,4 @@
 *	Usuario deleta seu comentário
 *	Usuario curte um artigo
 *	Usuario visualiza (de forma paginada) artigos
+*	Usuario visualiza os artigos ordenado por mais curtidos
