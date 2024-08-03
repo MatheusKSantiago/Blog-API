@@ -9,11 +9,16 @@ import com.learn.blog.article.repository.ArticleImageRepository;
 import com.learn.blog.article.repository.ArticleRepository;
 import com.learn.blog.user.UserService;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class ArticleService {
@@ -65,6 +70,11 @@ public class ArticleService {
         articleRepository.saveWhoLike(article.getId(),userService.getUser().getId());
         return article.getNumberOfLikes();
 
+    }
+    public List<Article> getPage(int page,int size){
+
+        return articleRepository
+                .findAll(PageRequest.of(page,size)).toList();
     }
 
     public void delete(long id){

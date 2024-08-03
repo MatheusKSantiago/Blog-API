@@ -1,5 +1,7 @@
 package com.learn.blog.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,17 +18,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"enabled","accountNonExpired","credentialsNonExpired",
+        "accountNonLocked","authorities","username"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private String role;
 
 

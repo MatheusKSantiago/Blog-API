@@ -1,5 +1,7 @@
 package com.learn.blog.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.learn.blog.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class Article {
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<ArticleImage> images;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "who_likes",
     joinColumns = @JoinColumn(name="article_id"),
@@ -29,6 +32,7 @@ public class Article {
     public long numberOfLikes;
 
     @ManyToOne
+    @JsonProperty(value = "authorEmail")
     private User author;
 
 }

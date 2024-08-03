@@ -1,5 +1,6 @@
 package com.learn.blog.article.controller;
 
+import com.learn.blog.article.entity.Article;
 import com.learn.blog.article.service.ArticleService;
 import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("article")
@@ -57,5 +60,12 @@ public class ArticleController {
     public ResponseEntity<Long> articleLike(@PathVariable long id){
         Long numberOfLikes =  articleService.like(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(numberOfLikes);
+    }
+
+    @GetMapping("page/{page}")
+    public ResponseEntity<List<Article>> getArticle(@PathVariable int page,
+                                                    @RequestParam(defaultValue = "2") int size){
+
+        return ResponseEntity.ok(articleService.getPage(page,size));
     }
 }

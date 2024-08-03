@@ -1,5 +1,6 @@
 package com.learn.blog.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class ArticleImage {
     private byte[] img;
 
     @ManyToOne
+    @JsonIgnore
     private Article article;
 
     private String description;
