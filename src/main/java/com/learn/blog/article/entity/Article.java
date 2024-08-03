@@ -1,6 +1,5 @@
 package com.learn.blog.article.entity;
 
-import com.learn.blog.article.entity.ArticleImage;
 import com.learn.blog.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,13 +20,15 @@ public class Article {
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<ArticleImage> images;
 
-    @ManyToMany
-    @JoinTable(name = "likes",
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "who_likes",
     joinColumns = @JoinColumn(name="article_id"),
     inverseJoinColumns = @JoinColumn(name="user_id"))
-    public List<User> curtidas;
+    public List<User> whoLikes;
+
+    public long numberOfLikes;
 
     @ManyToOne
-    private User user;
+    private User author;
 
 }

@@ -9,13 +9,11 @@ import com.learn.blog.article.repository.ArticleImageRepository;
 import com.learn.blog.article.repository.ArticleRepository;
 import com.learn.blog.user.UserService;
 import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class ArticleService {
@@ -44,7 +42,7 @@ public class ArticleService {
 
         var article = new Article();
         article.setText(articleCreationDTO.text());
-        article.setUser(userService.getUser());
+        article.setAuthor(userService.getUser());
         articleRepository.save(article);
 
 
@@ -55,6 +53,18 @@ public class ArticleService {
             articleImage.setDescription(articleCreationDTO.imageDescriptions()[index]);
             articleImageRepository.save(articleImage);
         }
+    }
+    @Transactional
+    public Long like(long id){
+        Article article = articleRepository
+                .findById(id)
+                .orElseThrow(()->new ArticleException("Article doesnt exists"));
+
+        article.setNumberOfLikes(article.getNumberOfLikes()+1);
+        articleRepository.save(article);
+        articleRepository.saveWhoLike(article.getId(),userService.getUser().getId());
+        return article.getNumberOfLikes();
+
     }
 
     public void delete(long id){
@@ -123,7 +133,7 @@ public class ArticleService {
                 .findById(id)
                 .orElseThrow(()->new ArticleException("Article doesnt exists"));
 
-        if(!article.getUser().getId().equals(userService.getUser().getId())){
+        if(!article.getAuthor().getId().equals(userService.getUser().getId())){
             throw new ArticleException("ACESS DENIED");
         }
     }

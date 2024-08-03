@@ -53,5 +53,9 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-
+    @GetMapping("{id}/like")
+    public ResponseEntity<Long> articleLike(@PathVariable long id){
+        Long numberOfLikes =  articleService.like(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(numberOfLikes);
+    }
 }
