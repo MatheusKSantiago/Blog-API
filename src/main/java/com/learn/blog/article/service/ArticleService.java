@@ -1,4 +1,4 @@
-package com.learn.blog.article;
+package com.learn.blog.article.service;
 
 import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
@@ -36,6 +36,12 @@ public class ArticleService {
 
     @Transactional
     public void save(ArticleCreationDTO articleCreationDTO) throws IOException {
+        MultipartFile[] imagesFiles = articleCreationDTO.images();
+        String[] imagesDescriptions = articleCreationDTO.imageDescriptions();
+
+        if (imagesFiles.length != imagesDescriptions.length)
+            throw new ArticleException("Image length doesnt match description length");
+
         var article = new Article();
         article.setText(articleCreationDTO.text());
         article.setUser(userService.getUser());
@@ -52,11 +58,14 @@ public class ArticleService {
     }
 
     public void delete(long id){
+        getPermission(id);
         articleRepository.deleteById(id);
     }
 
     @Transactional
     public void update(long id, ArticleUpdateDTO article){
+        getPermission(id);
+
         Article articleEntity = articleRepository
                 .findById(id)
                 .orElseThrow(()->new ArticleException("Article doesnt exists"));
@@ -104,6 +113,19 @@ public class ArticleService {
                 throw new RuntimeException("IOException during insertion of images");
             }
         }).toArray(ArticleImage[]::new);
+    }
+    public Article getArticleById(long id){
+        return articleRepository.findById(id).orElseThrow(()->new ArticleException("Article doesnt exists"));
+    }
+
+    private void getPermission(long id){
+        Article article = articleRepository
+                .findById(id)
+                .orElseThrow(()->new ArticleException("Article doesnt exists"));
+
+        if(!article.getUser().getId().equals(userService.getUser().getId())){
+            throw new ArticleException("ACESS DENIED");
+        }
     }
 
 }

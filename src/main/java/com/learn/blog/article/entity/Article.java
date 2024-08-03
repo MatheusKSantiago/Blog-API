@@ -21,6 +21,12 @@ public class Article {
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<ArticleImage> images;
 
+    @ManyToMany
+    @JoinTable(name = "likes",
+    joinColumns = @JoinColumn(name="article_id"),
+    inverseJoinColumns = @JoinColumn(name="user_id"))
+    public List<User> curtidas;
+
     @ManyToOne
     private User user;
 

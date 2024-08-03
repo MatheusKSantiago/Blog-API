@@ -1,8 +1,10 @@
-package com.learn.blog.article;
+package com.learn.blog.article.controller;
 
+import com.learn.blog.article.service.ArticleService;
 import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
 import com.learn.blog.article.exceptions.ArticleException;
+import com.learn.blog.user.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,23 +19,20 @@ import java.io.IOException;
 public class ArticleController {
 
     private ArticleService articleService;
+    private UserService userService;
 
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService,
+                             UserService userService) {
         this.articleService = articleService;
+        this.userService = userService;
     }
 
-    @ExceptionHandler(ArticleException.class)
-    public ResponseEntity<String> handleArticleException(ArticleException exception){
-        return ResponseEntity.badRequest().body(exception.getMessage());
-    }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Transactional
     public ResponseEntity<String> article(@ModelAttribute @Valid ArticleCreationDTO articleCreationDTO)
             throws IOException
     {
-        if (articleCreationDTO.images().length != articleCreationDTO.imageDescriptions().length)
-            return ResponseEntity.badRequest().body("number of images doesnt match the number of descriptions");
 
         articleService.save(articleCreationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,6 +40,7 @@ public class ArticleController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> articleDelete(@PathVariable long id){
+
         articleService.delete(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
