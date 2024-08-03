@@ -5,7 +5,6 @@
 
 *	Usuario comenta um artigo
 *	Usuario curte um artigo
-*	Usuario deleta (seu proprio artigo)
 *	Usuario atualiza (seu proprio artigo)
 *	Usuario visualiza (de forma paginada) artigo de outros usuarios
 	
@@ -19,3 +18,4 @@
 *	Autenticação e autorização com tokens
 *	Teste de integração
 *	Usuario publica um artigo
+*	Usuario deleta (seu proprio artigo)
