@@ -1,10 +1,7 @@
 package com.learn.blog.article;
 
-import com.learn.blog.user.UserLoginDTO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +20,15 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Transactional
-    public ResponseEntity<String> article(@RequestParam("images") MultipartFile[] images,
-                                    @RequestPart("descriptions") String[] descriptions,
-                                    @RequestParam("text") String text)
+    public ResponseEntity<String> article(@ModelAttribute @Valid ArticleCreationDTO articleCreationDTO)
             throws IOException
     {
-        if (images.length != descriptions.length)
+        if (articleCreationDTO.images().length != articleCreationDTO.imageDescriptions().length)
             return ResponseEntity.badRequest().body("number of images doesnt match the number of descriptions");
 
-        articleService.save(new ArticleImageDTO(images,descriptions),text);
+        articleService.save(articleCreationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

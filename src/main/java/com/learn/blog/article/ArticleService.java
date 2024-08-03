@@ -1,8 +1,8 @@
 package com.learn.blog.article;
 
-import com.learn.blog.user.UserRepository;
 import com.learn.blog.user.UserService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -25,17 +25,17 @@ public class ArticleService {
 
 
     @Transactional
-    public void save(ArticleImageDTO imageDTO,String articleText) throws IOException {
+    public void save(ArticleCreationDTO articleCreationDTO) throws IOException {
         var article = new Article();
-        article.setText(articleText);
+        article.setText(articleCreationDTO.text());
         article.setUser(userService.getUser());
         articleRepository.save(article);
 
-        for(int index=0; index<imageDTO.images().length; index++){
+        for(int index=0; index<articleCreationDTO.images().length; index++){
             var articleImage = new ArticleImage();
             articleImage.setArticle(article);
-            articleImage.setImg(imageDTO.images()[index].getBytes());
-            articleImage.setDescription(imageDTO.descriptions()[index]);
+            articleImage.setImg(articleCreationDTO.images()[index].getBytes());
+            articleImage.setDescription(articleCreationDTO.imageDescriptions()[index]);
             articleImageRepository.save(articleImage);
         }
     }
