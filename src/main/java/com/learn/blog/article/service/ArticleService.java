@@ -4,6 +4,7 @@ import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
 import com.learn.blog.article.entity.Article;
 import com.learn.blog.article.entity.ArticleImage;
+import com.learn.blog.article.enums.OrderBy;
 import com.learn.blog.article.exceptions.ArticleException;
 import com.learn.blog.article.repository.ArticleImageRepository;
 import com.learn.blog.article.repository.ArticleRepository;
@@ -71,10 +72,10 @@ public class ArticleService {
         return article.getNumberOfLikes();
 
     }
-    public List<Article> getPage(int page,int size){
+    public List<Article> getPage(int page, int size, OrderBy order){
 
         return articleRepository
-                .findAll(PageRequest.of(page,size)).toList();
+                .findAll(PageRequest.of(page,size,Sort.by(order.getValue()).descending())).toList();
     }
 
     public void delete(long id){

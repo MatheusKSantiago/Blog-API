@@ -1,6 +1,7 @@
 package com.learn.blog.article.controller;
 
 import com.learn.blog.article.entity.Article;
+import com.learn.blog.article.enums.OrderBy;
 import com.learn.blog.article.service.ArticleService;
 import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
@@ -64,8 +65,9 @@ public class ArticleController {
 
     @GetMapping("page/{page}")
     public ResponseEntity<List<Article>> getArticle(@PathVariable int page,
-                                                    @RequestParam(defaultValue = "2") int size){
+                                                    @RequestParam(defaultValue = "2") int size,
+                                                    @RequestParam(defaultValue = "NUMBER_OF_LIKES") OrderBy order){
 
-        return ResponseEntity.ok(articleService.getPage(page,size));
+        return ResponseEntity.ok(articleService.getPage(page,size,order));
     }
 }
