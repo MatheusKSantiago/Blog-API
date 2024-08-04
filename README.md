@@ -12,6 +12,7 @@ Este projeto é uma API para um blog, permitindo aos usuários criar, ler, atual
 * ***Spring Security***
 * ***Spring Data JPA***
 * ***Spring WEB***
+* ***H2 database***
 * ***JUnit***
 * ***JWT***
 * ***Java Reflections***
@@ -19,10 +20,15 @@ Este projeto é uma API para um blog, permitindo aos usuários criar, ler, atual
 ## Diagrama Entidade Relacionamento
 <img src="https://github.com/MasterKingRR/Blog-API/blob/main/diagrama.png" alt="Texto Alternativo">
 
-## Implementar:
+## Utilização
+No diretorio do projeto crie o container:
 
-*	Container Docker
-* 	Testes de integração
+'''
+docker-compose up --build
+'''
+
+
+## Implementar:
 * 	Testes de unidade (Mockito)
 ## Implementados:
 *	Autenticação e autorização com tokens
@@ -36,5 +42,5 @@ Este projeto é uma API para um blog, permitindo aos usuários criar, ler, atual
 *	Usuario visualiza (de forma paginada) artigos
 *	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
-
+*	Container Docker
 
