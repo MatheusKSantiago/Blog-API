@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,13 +73,13 @@ public class ArticleService {
         return article.getNumberOfLikes();
 
     }
-    public List<Article> getPage(int page, int size, OrderBy order){
-
-        return articleRepository
-                .findAll(PageRequest.of(page,size,Sort.by(order.getValue()).descending())).toList();
+    public List<Article> getPage(int page, int size, OrderBy order) throws NoSuchMethodException,
+            InvocationTargetException, IllegalAccessException
+    {
+        return (List<Article>) this.getClass().getMethod(order.getValue(), int.class, int.class, OrderBy.class).invoke(this,page,size,order);
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         getPermission(id);
         articleRepository.deleteById(id);
     }
@@ -147,6 +148,14 @@ public class ArticleService {
         if(!article.getAuthor().getId().equals(userService.getUser().getId())){
             throw new ArticleException("ACESS DENIED");
         }
+    }
+
+    public List<Article> orderByNumberOfLikes(int page,int size, OrderBy order){
+        return articleRepository
+                .findAll(PageRequest.of(page,size,Sort.by("numberOfLikes").descending())).toList();
+    }
+    public List<Article> orderByComments(int page,int size, OrderBy order){
+        return articleRepository.findMostCommented(PageRequest.of(page,size));
     }
 
 }

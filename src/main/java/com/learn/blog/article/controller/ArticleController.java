@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> articleDelete(@PathVariable long id){
+    public ResponseEntity<Void> articleDelete(@PathVariable long id) {
 
         articleService.delete(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
@@ -66,7 +67,9 @@ public class ArticleController {
     @GetMapping("page/{page}")
     public ResponseEntity<List<Article>> getArticle(@PathVariable int page,
                                                     @RequestParam(defaultValue = "2") int size,
-                                                    @RequestParam(defaultValue = "NUMBER_OF_LIKES") OrderBy order){
+                                                    @RequestParam(defaultValue = "NUMBER_OF_LIKES") OrderBy order)
+            throws InvocationTargetException, NoSuchMethodException, IllegalAccessException
+    {
 
         return ResponseEntity.ok(articleService.getPage(page,size,order));
     }

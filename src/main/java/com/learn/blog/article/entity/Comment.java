@@ -1,5 +1,6 @@
 package com.learn.blog.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.learn.blog.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,6 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@EntityListeners(CommentListener.class)
+@JsonIgnoreProperties(value = {"user","id","article"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +22,10 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @ManyToOne
     private Article article;
+
 }
