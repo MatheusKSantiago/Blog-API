@@ -1,9 +1,15 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-alpine
 
-WORKDIR /app
+WORKDIR app
 
-COPY blog-0.0.1.jar /app/app.jar
+COPY . .
+RUN apk add maven
+
+RUN mvn clean
+RUN mvn install
+
+CMD mvn spring-boot:run
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+CMD ["java", "-jar","target/blog-0.0.1-SNAPSHOT.jar"]
