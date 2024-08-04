@@ -23,9 +23,9 @@ Este projeto é uma API para um blog, permitindo aos usuários criar, ler, atual
 ## Utilização
 No diretorio do projeto crie o container:
 
-'''
+```
 docker-compose up --build
-'''
+```
 
 
 ## Implementar:
