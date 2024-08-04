@@ -2,7 +2,7 @@
 
 
 ## Diagrama Entidade Relacionamento
-!(https://github.com/MasterKingRR/Blog-API/blob/main/diagrama.png)
+<img src="https://github.com/MasterKingRR/Blog-API/blob/main/diagrama.png" alt="Texto Alternativo">
 
 ## Implementar:
 
