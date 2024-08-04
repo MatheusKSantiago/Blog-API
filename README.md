@@ -3,8 +3,6 @@
 
 ## Implementar:
 
-*	Usuario visualiza os artigos ordenado por mais comentados
-
 *	Container Docker
 * 	Testes de integração
 * 	Testes de unidade
@@ -19,3 +17,4 @@
 *	Usuario curte um artigo
 *	Usuario visualiza (de forma paginada) artigos
 *	Usuario visualiza os artigos ordenado por mais curtidos
+*	Usuario visualiza os artigos ordenado por mais comentados
