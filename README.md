@@ -1,6 +1,9 @@
 # Blog-API
 
 
+## Diagrama Entidade Relacionamento
+(https://github.com/MasterKingRR/Blog-API/blob/main/diagrama.png)
+
 ## Implementar:
 
 *	Container Docker
@@ -18,3 +21,5 @@
 *	Usuario visualiza (de forma paginada) artigos
 *	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
+
+
