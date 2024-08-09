@@ -6,7 +6,6 @@ import com.learn.blog.article.service.ArticleService;
 import com.learn.blog.article.dtos.ArticleCreationDTO;
 import com.learn.blog.article.dtos.ArticleUpdateDTO;
 import com.learn.blog.article.exceptions.ArticleException;
-import com.learn.blog.user.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,12 +23,10 @@ import java.util.Optional;
 public class ArticleController {
 
     private ArticleService articleService;
-    private UserService userService;
+    
 
-    public ArticleController(ArticleService articleService,
-                             UserService userService) {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
-        this.userService = userService;
     }
 
 
