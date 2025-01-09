@@ -42,5 +42,6 @@ docker-compose up --build
 *	Usuario visualiza (de forma paginada) artigos
 *	Usuario visualiza os artigos ordenado por mais curtidos
 *	Usuario visualiza os artigos ordenado por mais comentados
+*	Paginação
 *	Container Docker
 
